@@ -70,5 +70,4 @@
 
 ## 八、公開網站
 
-[開啟居服員緊急事件處置指南](https://homecare-emergency-pocket-guide.bx627kcrqh.chatgpt.site)
-
+[[開啟居服員緊急事件處置指南](https://homecare-emergency-pocket-guide.bx627kcrqh.chatgpt.site)](https://rjjjjjj0524-sys.github.io/---/)
