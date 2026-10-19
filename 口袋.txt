@@ -1,71 +1,1491 @@
-# 居家緊急數位口袋書
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1a8648">
+<title>居家緊急數位口袋書</title>
 
-公開網站：https://ciwas-care-guide-1014.bx627kcrqh.chatgpt.site
+<style>
+:root{
+  --green:#1a8648;
+  --yellow:#d8c821;
+  --ink:#243e30;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{
+  margin:0;
+  background:#fff;
+  color:var(--ink);
+  font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif;
+  font-size:20px;
+  line-height:1.65;
+  isolation:isolate;
+}
+body::before{
+  content:"";
+  position:fixed;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(100%,480px);
+  height:100dvh;
+  background:
+    url("https://ciwas-care-guide-1014.bx627kcrqh.chatgpt.site/care-background.png")
+    center center / cover no-repeat;
+  opacity:.23;
+  pointer-events:none;
+  z-index:-1;
+}
+body.category-screen::before{
+  background-image:
+    url("https://ciwas-care-guide-1014.bx627kcrqh.chatgpt.site/category-background.png");
+  background-size:contain;
+}
+button,input,a{font:inherit}
+button{cursor:pointer}
+button,a{-webkit-tap-highlight-color:transparent}
+button:focus-visible,a:focus-visible,input:focus-visible{
+  outline:3px solid #a59000;
+  outline-offset:3px;
+}
+.shell{
+  max-width:480px;
+  min-height:100dvh;
+  margin:auto;
+  padding-bottom:calc(110px + env(safe-area-inset-bottom));
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:14px 16px;
+  background:rgba(255,255,255,.94);
+  border-bottom:1px solid #e4e7df;
+}
+.brandlogo{
+  width:80px;
+  height:48px;
+  object-fit:contain;
+  flex-shrink:0;
+}
+.brand>div{flex:1}
+.brand b{
+  display:block;
+  font-size:19px;
+  line-height:1.35;
+}
+.brand button{
+  min-height:44px;
+  padding:5px 10px;
+  font-size:15px;
+  color:var(--green);
+  background:#fff;
+  border:1px solid #cad7c7;
+  border-radius:10px;
+}
+main{padding:12px 14px}
+h2{
+  font-size:22px;
+  line-height:1.5;
+  margin:0 0 8px;
+}
+p{margin:0 0 14px}
 
-## 專案目的
-協助居服員在外勤遇到緊急或異常事件時，快速查看處置方式，聯絡119、110或督導。
+.hero{
+  padding:14px;
+  margin-bottom:12px;
+  background:#fff7d9;
+  border:1px solid #e9dba2;
+  border-radius:14px;
+}
+.hero strong{
+  display:block;
+  color:#af3827;
+  font-size:24px;
+}
+.hero p{
+  margin:5px 0;
+  font-size:17px;
+}
+.notes{
+  border-top:1px solid #e9dba2;
+  margin-top:8px;
+  padding-top:8px;
+  font-size:15px;
+  line-height:1.8;
+}
+.search{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:10px 13px;
+  margin-bottom:14px;
+  background:rgba(255,255,255,.9);
+  border:1px solid #dfe5d9;
+  border-radius:12px;
+}
+.search input{
+  width:100%;
+  min-width:0;
+  border:0;
+  outline:none;
+  background:transparent;
+  color:var(--ink);
+  font-size:18px;
+}
+.sectionlabel{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-bottom:10px;
+}
+.sectionlabel h2{
+  margin:0;
+  font-size:19px;
+}
+.sectionlabel span{
+  font-size:13px;
+  color:#67755e;
+}
 
-## 使用對象
-居服員、居家服務督導與機構同仁。
+.list{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;
+  align-items:stretch;
+}
+.card{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  width:100%;
+  height:100%;
+  min-width:0;
+  padding:10px;
+  text-decoration:none;
+  color:#2e4934;
+  background:rgba(255,255,255,.78);
+  border:1px solid #dfe5d9;
+  border-radius:13px;
+}
+.card:hover{
+  background:#fafcf6;
+  border-color:#8ba96d;
+}
+.cardtext{
+  flex:1;
+  min-width:0;
+}
+.card b{
+  display:block;
+  font-size:22px;
+  line-height:1.4;
+  overflow-wrap:anywhere;
+}
+.card small{
+  display:block;
+  margin-top:4px;
+  font-size:16px;
+  line-height:1.45;
+  color:#687261;
+}
+.icon{
+  display:grid;
+  place-items:center;
+  width:34px;
+  height:34px;
+  flex-shrink:0;
+}
+.arrow{display:none}
+.category-text-card{
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+  padding:12px;
+}
+.category-text-card .cardtext{width:100%}
+.empty{
+  grid-column:1/-1;
+  padding:20px;
+  border-radius:12px;
+  background:#fff;
+}
 
-## 功能
-- 手機優先設計、大字與整張卡片可點。
-- 六大分類、25個事件，紅黃綠分級處置。
-- 事件搜尋與返回上一頁。
-- 固定底部119、110及督導撥號列。
-- 首頁與處置頁使用量體溫背景；事件列表使用扶助長者起身背景。
-- 免安裝、免登入。
+.back{
+  display:block;
+  min-height:44px;
+  padding:8px 13px;
+  margin-bottom:12px;
+  font-size:20px;
+  font-weight:700;
+  color:var(--green);
+  background:#fff;
+  border:1px solid #cad7bd;
+  border-radius:10px;
+}
+.description{
+  padding:10px 12px;
+  margin-bottom:10px;
+  font-size:20px;
+  line-height:1.6;
+  background:rgba(248,252,238,.9);
+  border:1px solid #d1dfbb;
+  border-radius:12px;
+}
+.warning{
+  padding:10px 12px;
+  margin-bottom:10px;
+  font-size:20px;
+  line-height:1.6;
+  color:#615121;
+  background:#fff4cf;
+  border:1px solid #e6d69b;
+  border-radius:12px;
+}
+.warning b{
+  display:block;
+  margin-bottom:3px;
+}
+.level{
+  padding:12px;
+  margin-bottom:10px;
+  border:1px solid;
+  border-radius:13px;
+}
+.level.r{
+  background:#fff8f6;
+  border-color:#e5bdb7;
+}
+.level.y{
+  background:#fffcf0;
+  border-color:#e0d197;
+}
+.level.g{
+  background:#f7fcf4;
+  border-color:#bbd3ba;
+}
+.situation{
+  margin:0 0 7px;
+  font-size:21px;
+  line-height:1.55;
+}
+.response{
+  margin:0;
+  font-size:20px;
+  line-height:1.65;
+}
+.procedure{
+  padding:12px;
+  margin-bottom:10px;
+  background:rgba(248,252,238,.9);
+  border:1px solid #d1dfbb;
+  border-radius:13px;
+}
+.procedure h2{font-size:20px}
+.steps{
+  padding:0;
+  margin:0;
+  list-style:none;
+  counter-reset:step;
+}
+.steps li{
+  display:flex;
+  gap:10px;
+  padding:6px 0;
+  counter-increment:step;
+}
+.steps li::before{
+  content:counter(step);
+  width:30px;
+  height:30px;
+  flex-shrink:0;
+  text-align:center;
+  font-size:16px;
+  font-weight:700;
+  color:var(--green);
+  background:#edf2dd;
+  border-radius:50%;
+}
+.footer-note{
+  margin:12px 0 0;
+  text-align:center;
+  color:#77806e;
+  font-size:12px;
+}
 
-## 檔案
-| 檔案 | 用途 |
-| --- | --- |
-| index.html | 頁面結構與版面樣式 |
-| app.js | 導覽、搜尋、電話設定與字體大小調整 |
-| data.js | 分類、事件與處置文字 |
-| icons.js | 綠黃配色的向量圖示 |
-| logo.svg | 台灣受恩Logo |
-| care-background.png | 首頁與處置頁背景 |
-| category-background.png | 第二頁背景 |
+/* 第二頁 */
+.category-screen .shell{
+  display:flex;
+  flex-direction:column;
+  height:100dvh;
+  min-height:0;
+  padding-bottom:calc(90px + env(safe-area-inset-bottom));
+}
+.category-screen main{
+  display:flex;
+  flex:1;
+  min-height:0;
+  padding:6px 8px;
+}
+.category-screen .page{
+  display:flex;
+  flex-direction:column;
+  flex:1;
+  min-width:0;
+  min-height:0;
+  gap:6px;
+}
+.category-screen .back{
+  flex-shrink:0;
+  align-self:flex-start;
+  margin:0;
+}
+.category-screen .footer-note{display:none}
+.category-screen .event-grid{
+  flex:1;
+  min-height:0;
+  gap:6px;
+  grid-template-rows:
+    repeat(var(--event-rows),minmax(min-content,1fr));
+}
+.category-screen .event-grid .card{
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:8px;
+  gap:5px;
+  text-align:center;
+}
+.category-screen .event-grid .cardtext{
+  flex:0;
+  width:100%;
+}
+.category-screen .event-grid b{
+  font-size:24px;
+  line-height:1.3;
+}
+.category-screen .event-grid .icon{
+  width:36px;
+  height:36px;
+}
 
-## 本機使用
-直接用瀏覽器開啟index.html即可使用。或在專案資料夾執行：
+/* 人身安全、交通事故、環境安全、服務未遇 */
+.category-screen .vertical-events{
+  grid-template-columns:minmax(0,1fr);
+}
+.category-screen .vertical-events .card{
+  flex-direction:row;
+  justify-content:flex-start;
+  gap:8px;
+  padding:10px;
+  text-align:left;
+}
+.category-screen .vertical-events .icon{
+  width:40px;
+  height:40px;
+}
+.category-screen .vertical-events .cardtext{
+  flex:1;
+  min-width:0;
+}
 
-```bash
-python -m http.server 8000
-```
+/* 身體突發狀況：統一大小 */
+.category-screen .uniform-events{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-template-rows:repeat(4,minmax(154px,1fr));
+}
+.category-screen .uniform-events .card{
+  padding:8px;
+  gap:6px;
+}
+.category-screen .uniform-events .icon{
+  width:30px;
+  height:30px;
+}
+.category-screen .uniform-events b{
+  font-size:22px;
+  line-height:1.3;
+  white-space:normal;
+}
+.care-illustration{
+  display:inline-block;
+  width:1.3em;
+  height:1.3em;
+  vertical-align:middle;
+  flex-shrink:0;
+}
+.icon .care-illustration{
+  width:100%;
+  height:100%;
+}
+.response .care-illustration,
+.step-symbol .care-illustration{
+  width:26px;
+  height:26px;
+}
 
-再開啟 http://localhost:8000 。
+/* 固定底部撥號 */
+.bottom{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+  width:100%;
+  max-width:480px;
+  padding:8px 12px calc(8px + env(safe-area-inset-bottom));
+  background:rgba(255,255,255,.94);
+  border-top:1px solid #e4e7df;
+  z-index:10;
+}
+.bottom a{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:66px;
+  padding:8px 3px;
+  color:#fff;
+  text-decoration:none;
+  font-size:18px;
+  font-weight:700;
+  line-height:1.35;
+  border-radius:12px;
+}
+.bottom small{
+  font-size:12px;
+  font-weight:500;
+}
+.call119{background:#b84031}
+.call110{background:#465b6a}
+.supervisor{background:var(--green)}
 
-## 督導電話
-使用首頁「設定」可填入督導電話，僅保存於當前瀏覽器。
-若要設定機構統一的預設電話，修改app.js頂端：
+/* 督導電話設定 */
+dialog{
+  width:410px;
+  max-width:calc(100% - 32px);
+  padding:22px;
+  color:var(--ink);
+  background:#fff;
+  border:1px solid #ced7be;
+  border-radius:18px;
+}
+dialog::backdrop{background:#15271980}
+dialog input{
+  width:100%;
+  padding:12px;
+  margin:8px 0 12px;
+  border:1px solid #bac8b0;
+  border-radius:10px;
+}
+dialog button{
+  min-height:46px;
+  padding:8px 14px;
+  color:var(--green);
+  background:#fff;
+  border:1px solid #a8bda1;
+  border-radius:10px;
+}
+dialog button[type=submit]{
+  color:#fff;
+  background:var(--green);
+}
+dialog p,dialog label{font-size:16px}
+.error{color:#a52f27}
 
-```js
-const SUPERVISOR_PHONE_NUMBER = '0912345678';
-```
+@media(max-width:360px){
+  .brandlogo{width:65px}
+  .brand b{font-size:17px}
+}
+@media(max-height:750px){
+  .category-screen .uniform-events{
+    grid-template-rows:repeat(4,minmax(124px,1fr));
+  }
+  .category-screen .uniform-events .card{
+    padding:6px;
+    gap:4px;
+  }
+  .category-screen .uniform-events .icon{
+    width:24px;
+    height:24px;
+  }
+  .category-screen .uniform-events b{
+    font-size:22px;
+    line-height:1.25;
+  }
+}
+</style>
+</head>
 
-## 上傳GitHub新專案
-1. 在GitHub建立新Repository，名稱可用homecare-emergency-guide。
-2. 解壓縮程式碼ZIP，進入資料夾。
-3. 在新Repository選擇Add file → Upload files。
-4. 將資料夾內所有檔案上傳，讓index.html與README.md位於儲存庫根目錄，按Commit changes。
+<body>
+<div class="shell">
+  <header class="brand">
+    <img
+      class="brandlogo"
+      src="https://ciwas-care-guide-1014.bx627kcrqh.chatgpt.site/logo.svg"
+      alt="台灣受恩 Logo"
+    >
+    <div><b>居家緊急數位口袋書</b></div>
+    <button id="settings" aria-label="設定督導電話">設定</button>
+  </header>
 
-也可使用Git：
+  <main id="app"></main>
+</div>
 
-```bash
-git init
-git add .
-git commit -m "Initial homecare emergency guide"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/homecare-emergency-guide.git
-git push -u origin main
-```
+<nav class="bottom" aria-label="緊急聯絡">
+  <a class="call119" href="tel:119">
+    <small>緊急救護</small>
+    撥打 119
+  </a>
+  <a class="call110" href="tel:110">
+    <small>報警求助</small>
+    撥打 110
+  </a>
+  <a class="supervisor" id="supervisor" href="#">
+    <small id="supervisorHint">尚未設定電話</small>
+    聯絡督導
+  </a>
+</nav>
 
-## GitHub Pages
-若需使用GitHub Pages，儲存庫Settings → Pages → Deploy from a branch，選擇main與/(root)，再儲存。公開Pages網址會由GitHub提供。
+<dialog id="dialog">
+  <form id="phoneForm">
+    <h2>設定督導電話</h2>
+    <p>設定後，可直接按底部按鈕撥號。</p>
+    <label for="phone">督導電話</label>
+    <input
+      id="phone"
+      type="tel"
+      inputmode="tel"
+      autocomplete="tel"
+      placeholder="例如 0912345678"
+    >
+    <p id="error" class="error" role="alert"></p>
+    <button type="button" id="close">取消</button>
+    <button type="submit">儲存電話</button>
+    <p style="margin:12px 0 0">
+      電話會保存在這台裝置的瀏覽器。
+    </p>
+  </form>
+</dialog>
 
-## 維護
-事件內容修改data.js；更新後先執行node --check app.js與node --check data.js。
-處置內容由機構確認與維護，實際緊急情況依119救護人員指示。
-台灣受恩Logo及使用者提供插圖依原權利使用，本專案未額外授予素材再散布權利。
+<!-- 載入目前網站的綠黃向量圖示 -->
+<script src="https://ciwas-care-guide-1014.bx627kcrqh.chatgpt.site/icons.js"></script>
 
+<script>
+/*
+資料格式：
+[
+  分類名稱,
+  分類符號,
+  [
+    [
+      事件名稱,
+      情況說明,
+      重要提醒,
+      [
+        ["r", 紅色情況, 處理方式],
+        ["y", 黃色情況, 處理方式],
+        ["g", 綠色情況, 處理方式]
+      ],
+      [依序處理步驟]
+    ]
+  ]
+]
+*/
+
+const GUIDE = [
+  ["身體突發狀況", "♡", [
+    [
+      "意識變化",
+      "個案出現反應遲鈍、叫不醒、意識混亂或分不清時間地點等異常情形。",
+      "",
+      [
+        [
+          "r",
+          "叫不醒、無反應、無呼吸",
+          "立即撥打119並開擴音，依指示協助進行CPR或使用AED，再通報督導。"
+        ],
+        [
+          "y",
+          "意識明顯混亂、反應變慢，和平常狀況不同",
+          "協助個案側躺，通報督導，依指示儘速就醫。"
+        ],
+        [
+          "g",
+          "反應稍微變慢、短暫分不清時間或地點，或休息後有恢復",
+          "先確認個案安全，回報督導，並持續觀察。"
+        ]
+      ]
+    ],
+    [
+      "胸痛、胸悶",
+      "個案出現胸悶、胸痛，飯後胸口灼熱，或轉身、按壓時會痛。",
+      "協助個案坐直或採最舒服、容易呼吸的姿勢，鬆開過緊衣物；不要勉強餵食或灌水。",
+      [
+        [
+          "r",
+          "嘴唇或指甲發紫、發灰，或胸悶、胸痛合併呼吸困難、意識改變、冒冷汗、頭暈、昏倒，或疼痛延伸至左肩背及下巴",
+          "撥打119，依救護人員指示協助，再通報督導。"
+        ],
+        [
+          "y",
+          "胸口持續不舒服，或反覆出現胸悶、胸痛",
+          "通報督導，依指示儘快就醫。"
+        ],
+        [
+          "g",
+          "姿勢改變或活動後出現輕微胸悶，休息後改善，沒有其他明顯症狀",
+          "先休息觀察，並通報督導。"
+        ]
+      ]
+    ],
+    [
+      "嘔吐、腹瀉、腹痛",
+      "個案出現嘔吐、腹瀉、腹部不適等情形。",
+      "不要自行餵藥；若持續嘔吐，不要勉強灌水或餵食。",
+      [
+        [
+          "r",
+          "持續嘔吐、腹瀉，出現高燒、劇烈腹痛、血便或意識改變",
+          "通報督導，依指示儘快就醫；若意識不清，立即撥打119。"
+        ],
+        [
+          "y",
+          "輕微腹痛，嘔吐或腹瀉1～2次",
+          "少量多次補充水分及電解質，持續觀察並通報督導。"
+        ]
+      ]
+    ],
+    [
+      "抽搐",
+      "出現雙眼上吊、牙關緊閉、全身或肢體劇烈抽動僵硬，並可能失去意識、嘴唇發青。",
+      "不要壓住手腳、不要硬撐開嘴巴或塞東西；不要餵水或餵藥，移開周圍危險物品。",
+      [
+        [
+          "r",
+          "超過5分鐘、連續抽搐、嘴唇發青、呼吸困難或叫不醒",
+          "立即撥打119，讓個案側躺保持呼吸通暢，再通報督導。"
+        ],
+        [
+          "y",
+          "全身抽動或短暫失去意識，未滿5分鐘",
+          "讓個案側躺、保護頭部、鬆開衣物；抽搐停止後立即通報督導。"
+        ],
+        [
+          "g",
+          "局部手腳短暫抽動，意識清楚",
+          "讓個案休息、移開危險物品、記錄時間並通報督導。"
+        ]
+      ]
+    ],
+    [
+      "嘴角歪斜／單側肢體無力／說話突然含糊",
+      "個案突然出現單側無力、臉歪、看不清楚、說話不清或單側麻木。",
+      "不餵食、不餵水、不餵藥。",
+      [
+        [
+          "r",
+          "突然出現上述情形",
+          "立即撥打119，依救護人員的指示協助，並通知督導。"
+        ]
+      ]
+    ],
+    [
+      "頭部疼痛",
+      "個案出現頭痛，可能伴隨頭暈、噁心、嘔吐或手腳無力等症狀。",
+      "不要自行餵藥或讓個案走動。",
+      [
+        [
+          "r",
+          "突然劇烈頭痛、意識改變、說話不清、嘴角歪斜、單側肢體無力；不要自行餵水",
+          "立即撥打119，記錄發作時間，再通報督導。"
+        ],
+        [
+          "y",
+          "頭痛持續或加劇，伴隨頭暈、噁心或嘔吐",
+          "讓個案休息，通報督導，依指示儘速就醫。"
+        ],
+        [
+          "g",
+          "輕微頭痛，意識清楚",
+          "讓個案休息、補充水分、持續觀察，並通報督導。"
+        ]
+      ]
+    ],
+    [
+      "呼吸／身體狀況異常",
+      "個案出現與平常不同的身體狀況，例如比平常更喘、腳部腫脹加重、尿量明顯減少、心悸或頭暈等。",
+      "",
+      [
+        [
+          "r",
+          "呼吸明顯困難、無法正常說話、意識改變或昏倒",
+          "立即撥打119，再通報督導。"
+        ],
+        [
+          "y",
+          "比平常更喘、腳部腫脹加重、尿量明顯減少，或持續心悸、頭暈",
+          "通報督導，依指示儘速就醫。"
+        ],
+        [
+          "g",
+          "輕微不適，休息後改善，且無其他明顯異常",
+          "先休息、持續觀察並通報督導。"
+        ]
+      ]
+    ]
+  ]],
+
+  ["照顧意外", "✚", [
+    [
+      "跌倒",
+      "個案因重心不穩或居服員疏忽而跌倒。",
+      "不要急著拉起個案，並拍照記錄。",
+      [
+        [
+          "r",
+          "頭部受到撞擊、意識不清、大量出血或身體劇烈疼痛",
+          "立即撥打119，並通報督導。"
+        ],
+        [
+          "y",
+          "扭傷、傷口範圍較大或較深的撕裂傷、皮膚撕裂",
+          "通報督導，依指示盡快就醫。"
+        ],
+        [
+          "g",
+          "擦傷、挫傷或小範圍的皮膚撕裂傷",
+          "先讓個案保持原來的姿勢，休息後，慢慢扶個案坐起來，並通報督導。"
+        ]
+      ]
+    ],
+    [
+      "噎到",
+      "個案突然無法說話、劇烈咳嗽，或雙手掐脖子，表現出呼吸困難。",
+      "不要餵水，也不要用手伸進嘴裡亂挖異物。",
+      [
+        [
+          "r",
+          "失去意識、沒有正常呼吸",
+          "立即撥打119，依救護人員指示協助，再通報督導。"
+        ],
+        [
+          "y",
+          "無法說話、咳嗽或發出聲音，但仍有意識",
+          "立即施行哈姆立克法，異物排除、狀況穩定後，通報督導，依指示就醫。"
+        ],
+        [
+          "g",
+          "可以呼吸、說話及用力咳嗽",
+          "鼓勵個案繼續咳嗽，在旁觀察，並通報督導。"
+        ]
+      ]
+    ],
+    [
+      "傷口流血",
+      "個案因跌倒擦傷或碰到銳利物，造成傷口流血。",
+      "先戴手套或用塑膠袋隔開，避免直接接觸血液。",
+      [
+        [
+          "r",
+          "大量出血、血止不住、臉色蒼白或意識改變",
+          "用紗布、乾淨毛巾或衣服持續加壓止血，立即撥打119，並通報督導。"
+        ],
+        [
+          "y",
+          "小擦傷、少量流血",
+          "簡單止血並包紮，完成後通報督導，依指示處理。"
+        ]
+      ]
+    ],
+    [
+      "燙傷",
+      "個案皮膚接觸熱水或高溫物品後，出現紅腫、疼痛、水泡或脫皮。",
+      "大面積燒傷，使用流動冷水沖洗；老人不可泡水太久，並注意保暖。切勿塗抹牙膏或偏方。",
+      [
+        [
+          "r",
+          "面積較大、紅腫、有明顯水泡、皮膚疼痛，或燙傷部位在臉部、關節處、生殖器官等重要部位",
+          "立即用流動冷水沖洗15～30分鐘，沖洗時撥打119，再通報督導。若燙傷面積過大，用毛巾或紗布覆蓋傷口。"
+        ],
+        [
+          "y",
+          "只有表皮泛紅、沒有水泡",
+          "立即用流動的冷水沖洗15分鐘，疼痛緩解後，通報督導。"
+        ]
+      ]
+    ],
+    [
+      "用藥異常",
+      "個案忘記吃藥、多吃藥，或服務時給錯藥。",
+      "不要自行催吐，也不要再補吃其他藥。",
+      [
+        [
+          "r",
+          "出現呼吸困難、叫不醒、抽搐、意識不清、全身紅疹，或臉部、嘴唇腫脹",
+          "立即撥打119，保留藥袋及藥物，並通報督導。"
+        ],
+        [
+          "y",
+          "忘記吃藥、吃錯藥，或給錯藥量，但目前沒有不舒服",
+          "立即停止給藥，保留藥袋及剩餘藥物，並通報督導。"
+        ]
+      ]
+    ],
+    [
+      "管路滑脫",
+      "個案的鼻胃管、尿管或氣切管鬆動、滑出或完全掉落。",
+      "管路滑脫不可自行放回；只有受過專業訓練者，才能依原本方式處理。",
+      [
+        [
+          "r",
+          "管路脫落後，出現呼吸困難、大量流血、腹部劇痛、尿不出來、嘴唇發紫或意識不清",
+          "立即撥打119，不要自行塞回或置入鼻胃管、尿管，並通報督導。"
+        ],
+        [
+          "y",
+          "鼻胃管、尿管部分滑出或完全脫落，但個案沒有明顯不舒服",
+          "不要自行塞回，停止灌食或餵藥，通報督導。"
+        ],
+        [
+          "g",
+          "固定膠帶鬆開，管路沒有滑出，個案沒有不舒服",
+          "停止使用並固定管路，通報督導。"
+        ]
+      ]
+    ]
+  ]],
+
+  ["服務未遇", "⌂", [
+    [
+      "可進入案家，個案不在家",
+      "可進入案家，發現個案不在家。",
+      "不要自行簽到、簽退。",
+      [],
+      [
+        "查看屋內及周邊線索，確認個案是否在家跌倒，或出門的跡象；若個案有電話，嘗試聯絡。",
+        "立即通報督導與家屬。",
+        "依督導指示，在安全處等待，並視情況撥打119或110。",
+        "拍照留存，並完整紀錄時間及現場情形。"
+      ]
+    ],
+    [
+      "無法進入案家，個案沒有回應",
+      "無法進入案家，個案也沒有回應。",
+      "",
+      [],
+      [
+        "查看周邊線索，看有無出門跡象；若個案有電話，嘗試聯絡。",
+        "立即通報督導與家屬。",
+        "若懷疑屋內有危急狀況，撥打119。若個案走失直接撥打110報警，不需等24小時。不要自行破門，也不要擅自離開現場尋找。",
+        "拍照留存，並完整紀錄時間及現場情形。"
+      ]
+    ]
+  ]],
+
+  ["人身安全", "♧", [
+    [
+      "性騷擾",
+      "個案或家屬出現讓人感到不舒服、不受歡迎的言語或行為。例如：帶有性意味的言語、故意觸碰身體、要求擁抱或親吻等。",
+      "先保持安全距離，明確拒絕，必要時離開現場。保留相關訊息、照片及事件紀錄，並儘快通報督導。",
+      [
+        [
+          "r",
+          "強抱、強吻、脫衣、限制離開、攻擊或暴力行為",
+          "立即離開現場，撥打110並通報督導；若受傷或需要緊急醫療協助，撥打119。"
+        ],
+        [
+          "y",
+          "故意觸碰身體、拉手，或要求擁抱、親吻",
+          "明確拒絕並保持距離，必要時離開現場，並通報督導。"
+        ],
+        [
+          "g",
+          "說黃色笑話、評論身材，或說讓人不舒服的話",
+          "明確說「請不要這樣」，保持距離，通報督導並留下紀錄。"
+        ]
+      ]
+    ],
+    [
+      "暴力攻擊",
+      "個案或家屬大聲辱罵威脅，或出現推打、咬人、捏人、丟東西等攻擊行為。",
+      "有危險先離開，不要為了拿東西、完成服務或跟對方爭論而留下。",
+      [
+        [
+          "r",
+          "被推打、被咬、被捏、對方拿著危險物品，或無法安全離開",
+          "先保護自己，離開危險處，撥打110並通報督導；若受傷或需要緊急醫療協助時，撥打119。"
+        ],
+        [
+          "y",
+          "出現威脅性的言語、行為，或丟東西",
+          "立即離開現場，並通報督導及家屬。"
+        ],
+        [
+          "g",
+          "大聲辱罵、情緒激動",
+          "停止服務、保持距離，不與對方爭吵，並通報督導。"
+        ]
+      ]
+    ],
+    [
+      "財物遺失",
+      "服務期間或服務後，案家發現金錢、物品或其他財物遺失，並懷疑與居服員有關。",
+      "",
+      [
+        [
+          "y",
+          "個案或家屬指控偷竊、要求搜身或賠錢",
+          "保持冷靜，不爭吵，堅決不私下賠錢、不接受搜身。可協助尋找物品並立即通報督導，由督導協助查看監視器或協助釐清事情經過。"
+        ]
+      ]
+    ]
+  ]],
+
+  ["交通事故", "↗", [
+    [
+      "居服員發生車禍",
+      "轉場途中機車故障，或發生擦撞、摔車而受傷。",
+      "不要硬撐著繼續服務；保留診斷證明、醫療收據、事故照片及維修單據。",
+      [
+        [
+          "r",
+          "大量流血、劇烈疼痛、無法站立或意識不清",
+          "留在原地不要任意移動，以免傷勢加重，立即撥打110及119。安全後再通報督導。"
+        ],
+        [
+          "y",
+          "發生擦撞或摔車，有輕微擦傷但意識清楚",
+          "移至安全處，撥打110並通報督導；若需要就醫，請保留相關照片及收據。"
+        ],
+        [
+          "g",
+          "機車故障，沒有受傷",
+          "移至安全處，並通報督導。"
+        ]
+      ]
+    ],
+    [
+      "陪同外出發生事故",
+      "陪同個案外出時，在推輪椅或走路的途中被車輛撞傷。",
+      "不要私下和解。保留警方案號、事故照片、診斷證明及醫療收據。",
+      [
+        [
+          "r",
+          "大量流血、身體劇烈疼痛、無法站立或意識不清",
+          "不要任意移動傷者，立即撥打110及119，再通報督導。"
+        ],
+        [
+          "y",
+          "個案或自己有擦傷、疼痛，但意識清楚",
+          "撥打110並通報督導，拍下事故現場、車牌及輪椅損壞情況。"
+        ],
+        [
+          "g",
+          "輕微碰撞，雙方沒有明顯受傷",
+          "移至安全處，通報督導，並持續觀察是否出現不舒服。"
+        ]
+      ]
+    ]
+  ]],
+
+  ["環境安全", "⚑", [
+    [
+      "火災",
+      "火勢變大，現場出現大量濃煙。",
+      "不搭電梯、不花時間找濕毛巾、不躲在浴室、不返回拿東西、不穿越濃煙。",
+      [],
+      [
+        "往安全出口逃生，開門前，先確認門是否發燙，並留意門外是否有濃煙。",
+        "樓梯間沒有煙，快速往一樓的方向逃生；若樓梯間有煙，不要往上跑，應在同一樓層避開濃煙。",
+        "逃生時隨手關門，可減少火勢及濃煙擴散。",
+        "如果所有出口都是濃煙，先留在有對外窗的房間，並關上門，撥打119，說明位置並等待救援。",
+        "到安全處後撥打119，並通報督導。"
+      ]
+    ],
+    [
+      "煮飯起火",
+      "煮飯時，油鍋或爐火突然起火。",
+      "油鍋起火不能潑水。",
+      [
+        [
+          "r",
+          "火勢變大或無法控制",
+          "立即帶個案離開，到安全處後立即撥打119，再通報督導。"
+        ],
+        [
+          "y",
+          "火勢較小",
+          "在安全的情況下，從自己的一側慢慢蓋上鍋蓋，並關閉爐火及瓦斯。不要移動鍋子，不要掀開鍋蓋，直到鍋子完全冷卻。"
+        ]
+      ]
+    ],
+    [
+      "電器起火",
+      "電線、插座或電器冒煙、出現火花或起火。",
+      "電器起火不能潑水，也不能使用泡沫型滅火器。",
+      [
+        [
+          "r",
+          "火勢變大、濃煙變多或看不到起火處",
+          "立即帶個案離開，到安全處後撥打119，再通報督導。"
+        ],
+        [
+          "y",
+          "電器冒煙、冒火花、火勢很小",
+          "在安全情況下，避開火源，關閉總電源；可使用滅火器滅火，並通報督導。"
+        ]
+      ]
+    ],
+    [
+      "地震",
+      "服務時突然發生地震，屋內物品搖晃或掉落。",
+      "不衝出去、不搭電梯、不回屋內拿東西。",
+      [],
+      [
+        "協助個案趴下、掩護、穩住，保護頭頸，並遠離窗戶、櫃子及掉落物。",
+        "地震停止後，確認個案有無受傷；確認周遭環境安全後，再協助個案離開。",
+        "有人受傷或受困，立即撥打119。",
+        "到安全處後通報督導及家屬。"
+      ]
+    ],
+    [
+      "瓦斯外洩",
+      "聞到類似臭雞蛋味，或聽到瓦斯漏氣聲。",
+      "不開、不關任何電器，也不要點火。",
+      [],
+      [
+        "在安全情況下，立即關閉瓦斯總開關。",
+        "輕輕推開窗戶通風，不可使用電風扇。",
+        "立即帶個案離開現場，不要在屋內逗留。",
+        "到戶外安全處撥打119，再通報督導。"
+      ]
+    ]
+  ]]
+];
+
+/* 可在這裡填入機構統一的督導電話 */
+const SUPERVISOR_PHONE_NUMBER = "";
+
+const $ = selector => document.querySelector(selector);
+const categories = GUIDE;
+
+const categoryIcons = [
+  "🫀", "🩹", "🚪", "🛡️", "🛵", "🏠"
+];
+
+const eventIcons = [
+  ["😵","💔","🤢","〰️","🗣️","🤕","🫁"],
+  ["🚶","😮","🩸","♨️","💊","🧷"],
+  ["🚪","🔒"],
+  ["✋","🛡️","💰"],
+  ["🛵","🦽"],
+  ["🔥","🍳","🔌","🫨","⚠️"]
+];
+
+const categoryDescriptions = [
+  "意識、胸痛、嘔吐/腹瀉、頭痛、身體狀況異常",
+  "跌倒、噎到、流血、燙傷、藥物、管路滑落",
+  "找不到個案或無人回應時",
+  "自身安全受到影響時",
+  "行車或陪同外出遇到事故時",
+  "周遭環境出現危險時"
+];
+
+function escapeHTML(value){
+  return String(value).replace(/[&<>"']/g, character => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  }[character]));
+}
+
+/* 圖示載入失敗時，仍可使用原本符號 */
+function iconHTML(symbol){
+  if(typeof illustratedIcon === "function"){
+    return illustratedIcon(symbol);
+  }
+  return escapeHTML(symbol);
+}
+
+function actionKey(text){
+  if(/撥打119|撥打110|立即撥打/.test(text)) return "📞";
+  if(/加壓|止血|包紮/.test(text)) return "🩹";
+  if(/沖洗/.test(text)) return "🚿";
+  if(/給藥|藥袋|餵藥/.test(text)) return "💊";
+  if(/關閉.*電源/.test(text)) return "🔌";
+  if(/鍋蓋|爐火/.test(text)) return "🍳";
+  if(/窗戶通風/.test(text)) return "🪟";
+  if(/離開|逃生|安全出口/.test(text)) return "🚪";
+  if(/照片|拍照|紀錄|記錄/.test(text)) return "📝";
+  if(/查看|確認|觀察/.test(text)) return "👀";
+  if(/通報|回報|聯絡/.test(text)) return "📣";
+  if(/側躺|休息/.test(text)) return "🛏️";
+  if(/頭頸|頭部|掩護/.test(text)) return "🛡️";
+  return "🤝";
+}
+
+function actionIcon(text){
+  return iconHTML(actionKey(text));
+}
+
+/* 督導電話 */
+let savedPhone = "";
+
+try{
+  savedPhone = localStorage.getItem("supervisorPhone") || "";
+}catch{}
+
+function updatePhone(){
+  const phone = savedPhone || SUPERVISOR_PHONE_NUMBER;
+  $("#supervisor").href = phone ? "tel:" + phone : "#";
+  $("#supervisorHint").textContent =
+    phone ? "服務通報" : "尚未設定電話";
+}
+
+function openSettings(){
+  $("#phone").value = savedPhone || SUPERVISOR_PHONE_NUMBER;
+  $("#error").textContent = "";
+  $("#dialog").showModal();
+}
+
+$("#settings").onclick = openSettings;
+
+$("#close").onclick = () => {
+  $("#dialog").close();
+};
+
+$("#supervisor").onclick = event => {
+  if(!(savedPhone || SUPERVISOR_PHONE_NUMBER)){
+    event.preventDefault();
+    openSettings();
+  }
+};
+
+$("#phoneForm").onsubmit = event => {
+  event.preventDefault();
+
+  const value = $("#phone").value.replace(/[\s()-]/g, "");
+
+  if(value && !/^\+?\d{6,15}$/.test(value)){
+    $("#error").textContent =
+      "請輸入有效的電話號碼（6～15碼數字）。";
+    return;
+  }
+
+  try{
+    localStorage.setItem("supervisorPhone", value);
+    savedPhone = value;
+  }catch{
+    $("#error").textContent =
+      "無法儲存，請確認瀏覽器允許儲存設定。";
+    return;
+  }
+
+  updatePhone();
+  $("#dialog").close();
+};
+
+/* 分類及事件按鈕 */
+function card(icon, title, subtitle, href){
+  const isCategory = /^#category\/\d+$/.test(href);
+
+  const picture = isCategory
+    ? ""
+    : `<span class="icon" aria-hidden="true">${iconHTML(icon)}</span>`;
+
+  return `
+    <a
+      class="card ${isCategory ? "category-text-card" : ""}"
+      href="${href}"
+    >
+      ${picture}
+      <span class="cardtext">
+        <b>${escapeHTML(title)}</b>
+        ${subtitle ? `<small>${escapeHTML(subtitle)}</small>` : ""}
+      </span>
+    </a>
+  `;
+}
+
+function previousPage(){
+  const parts = location.hash.slice(1).split("/");
+
+  if(parts[0] === "event" && categories[Number(parts[1])]){
+    location.hash = "category/" + parts[1];
+  }else{
+    location.hash = "";
+  }
+}
+
+function back(){
+  return `
+    <button class="back" onclick="previousPage()">
+      ← 返回上一頁
+    </button>
+  `;
+}
+
+/* 按鈕文字自動放大 */
+function fitCardLabels(){
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+
+  if(!context) return;
+
+  document.querySelectorAll(".card b").forEach(label => {
+    const button = label.closest(".card");
+
+    if(button.closest(".uniform-events")){
+      label.style.removeProperty("font-size");
+      label.style.removeProperty("white-space");
+      return;
+    }
+
+    const textBox = label.parentElement;
+    const width = textBox.clientWidth - 2;
+
+    if(width <= 0) return;
+
+    const style = getComputedStyle(label);
+    context.font = "700 100px " + style.fontFamily;
+
+    const measured = context.measureText(label.textContent).width;
+    const buttonStyle = getComputedStyle(button);
+
+    const availableHeight =
+      button.clientHeight -
+      parseFloat(buttonStyle.paddingTop) -
+      parseFloat(buttonStyle.paddingBottom);
+
+    const limit = document.body.classList.contains("category-screen")
+      ? Math.min(64, availableHeight / 1.3)
+      : 32;
+
+    const fitted = Math.floor(
+      Math.min(limit, width / Math.max(measured, 1) * 100)
+    );
+
+    label.style.fontSize = Math.max(22, fitted) + "px";
+    label.style.whiteSpace = fitted >= 22 ? "nowrap" : "normal";
+  });
+}
+
+function categoryCards(){
+  return categories.map((category, index) => card(
+    categoryIcons[index],
+    category[0],
+    categoryDescriptions[index],
+    `#category/${index}`
+  )).join("");
+}
+
+/* 頁面切換 */
+function render(){
+  const parts = location.hash.slice(1).split("/");
+  const categoryIndex = Number(parts[1]);
+  const eventIndex = Number(parts[2]);
+
+  const isCategory =
+    parts[0] === "category" &&
+    !!categories[categoryIndex];
+
+  const isEvent =
+    parts[0] === "event" &&
+    !!categories[categoryIndex]?.[2]?.[eventIndex];
+
+  let html = "";
+
+  if(isEvent){
+    const item = categories[categoryIndex][2][eventIndex];
+
+    html = back() + `
+      <div class="description">
+        ${escapeHTML(item[1])}
+      </div>
+
+      ${item[2] ? `
+        <aside class="warning">
+          <b>⚠ 重要提醒</b>
+          ${escapeHTML(item[2])}
+        </aside>
+      ` : ""}
+    `;
+
+    if(item[4]){
+      html += `
+        <section class="procedure">
+          <h2>處理步驟</h2>
+          <ol class="steps">
+            ${item[4].map(step => `
+              <li>
+                <span>
+                  <span class="step-symbol" aria-hidden="true">
+                    ${actionIcon(step)}
+                  </span>
+                  ${escapeHTML(step)}
+                </span>
+              </li>
+            `).join("")}
+          </ol>
+        </section>
+      `;
+    }
+
+    html += item[3].map(([level, situation, action]) => `
+      <section class="level ${level}">
+        <h2 class="situation">
+          <span aria-hidden="true">
+            ${{r:"🔴", y:"🟡", g:"🟢"}[level]}
+          </span>
+          ${escapeHTML(situation)}
+        </h2>
+
+        <p class="response">
+          <span aria-hidden="true">${actionIcon(action)}</span>
+          ${escapeHTML(action)}
+        </p>
+      </section>
+    `).join("");
+
+  }else if(isCategory){
+    const category = categories[categoryIndex];
+    const vertical = [2,3,4,5].includes(categoryIndex);
+
+    const rows = vertical
+      ? category[2].length
+      : Math.ceil(category[2].length / 2);
+
+    html = back() + `
+      <div
+        class="list event-grid
+          ${vertical ? "vertical-events" : ""}
+          ${categoryIndex === 0 ? "uniform-events" : ""}"
+        style="--event-rows:${rows}"
+        aria-label="${escapeHTML(category[0])}事件列表"
+      >
+        ${category[2].map((item, index) => card(
+          eventIcons[categoryIndex][index],
+          item[0],
+          "",
+          `#event/${categoryIndex}/${index}`
+        )).join("")}
+      </div>
+    `;
+
+  }else{
+    html = `
+      <section class="hero">
+        <strong>🚨 請立即撥打 119</strong>
+        <p>若意識不清楚，無正常呼吸或情況危急時</p>
+        <div class="notes">
+          ※ 保持冷靜，確保自身與個案安全。<br>
+          ※ 遇到異常事件，請主動通報，切勿隱瞞。
+        </div>
+      </section>
+
+      <label class="search">
+        <span aria-hidden="true">⌕</span>
+        <input
+          id="search"
+          type="search"
+          placeholder="搜尋事件，例如：跌倒"
+          aria-label="搜尋事件"
+        >
+      </label>
+
+      <div class="sectionlabel">
+        <h2 id="listTitle">請選擇事件分類</h2>
+        <span id="count">6 大類 · 25 個事件</span>
+      </div>
+
+      <div class="list" id="results">
+        ${categoryCards()}
+      </div>
+    `;
+  }
+
+  document.body.classList.toggle("category-screen", isCategory);
+  $(".brand").hidden = isCategory || isEvent;
+
+  $("#app").innerHTML = `
+    <div class="page">
+      ${html}
+      <p class="footer-note">
+        先確保安全，再依情況處理與通報。
+      </p>
+    </div>
+  `;
+
+  requestAnimationFrame(fitCardLabels);
+  window.scrollTo({top:0, behavior:"instant"});
+
+  if(isCategory || isEvent){
+    $("#app .back")?.focus({preventScroll:true});
+  }
+
+  const search = $("#search");
+
+  if(search){
+    search.oninput = () => {
+      const query = search.value.trim();
+
+      if(!query){
+        $("#results").innerHTML = categoryCards();
+        $("#listTitle").textContent = "請選擇事件分類";
+        $("#count").textContent = "6 大類 · 25 個事件";
+        requestAnimationFrame(fitCardLabels);
+        return;
+      }
+
+      const matches = [];
+
+      categories.forEach((category, categoryIndex) => {
+        category[2].forEach((item, eventIndex) => {
+          if((item[0] + item[1]).includes(query)){
+            matches.push(card(
+              eventIcons[categoryIndex][eventIndex],
+              item[0],
+              category[0],
+              `#event/${categoryIndex}/${eventIndex}`
+            ));
+          }
+        });
+      });
+
+      $("#listTitle").textContent = "搜尋結果";
+      $("#count").textContent = matches.length + " 個事件";
+
+      $("#results").innerHTML = matches.join("") || `
+        <div class="empty">
+          找不到符合的事件，請換個關鍵字，或從分類查看。
+        </div>
+      `;
+
+      requestAnimationFrame(fitCardLabels);
+    };
+  }
+}
+
+window.addEventListener("resize", () => {
+  requestAnimationFrame(fitCardLabels);
+});
+
+window.addEventListener("hashchange", render);
+
+document.fonts?.ready.then(() => {
+  requestAnimationFrame(fitCardLabels);
+});
+
+updatePhone();
+render();
+</script>
+</body>
+</html>
