@@ -1,0 +1,71 @@
+# 居家緊急數位口袋書
+
+公開網站：https://ciwas-care-guide-1014.bx627kcrqh.chatgpt.site
+
+## 專案目的
+協助居服員在外勤遇到緊急或異常事件時，快速查看處置方式，聯絡119、110或督導。
+
+## 使用對象
+居服員、居家服務督導與機構同仁。
+
+## 功能
+- 手機優先設計、大字與整張卡片可點。
+- 六大分類、25個事件，紅黃綠分級處置。
+- 事件搜尋與返回上一頁。
+- 固定底部119、110及督導撥號列。
+- 首頁與處置頁使用量體溫背景；事件列表使用扶助長者起身背景。
+- 免安裝、免登入。
+
+## 檔案
+| 檔案 | 用途 |
+| --- | --- |
+| index.html | 頁面結構與版面樣式 |
+| app.js | 導覽、搜尋、電話設定與字體大小調整 |
+| data.js | 分類、事件與處置文字 |
+| icons.js | 綠黃配色的向量圖示 |
+| logo.svg | 台灣受恩Logo |
+| care-background.png | 首頁與處置頁背景 |
+| category-background.png | 第二頁背景 |
+
+## 本機使用
+直接用瀏覽器開啟index.html即可使用。或在專案資料夾執行：
+
+```bash
+python -m http.server 8000
+```
+
+再開啟 http://localhost:8000 。
+
+## 督導電話
+使用首頁「設定」可填入督導電話，僅保存於當前瀏覽器。
+若要設定機構統一的預設電話，修改app.js頂端：
+
+```js
+const SUPERVISOR_PHONE_NUMBER = '0912345678';
+```
+
+## 上傳GitHub新專案
+1. 在GitHub建立新Repository，名稱可用homecare-emergency-guide。
+2. 解壓縮程式碼ZIP，進入資料夾。
+3. 在新Repository選擇Add file → Upload files。
+4. 將資料夾內所有檔案上傳，讓index.html與README.md位於儲存庫根目錄，按Commit changes。
+
+也可使用Git：
+
+```bash
+git init
+git add .
+git commit -m "Initial homecare emergency guide"
+git branch -M main
+git remote add origin https://github.com/YOUR_USERNAME/homecare-emergency-guide.git
+git push -u origin main
+```
+
+## GitHub Pages
+若需使用GitHub Pages，儲存庫Settings → Pages → Deploy from a branch，選擇main與/(root)，再儲存。公開Pages網址會由GitHub提供。
+
+## 維護
+事件內容修改data.js；更新後先執行node --check app.js與node --check data.js。
+處置內容由機構確認與維護，實際緊急情況依119救護人員指示。
+台灣受恩Logo及使用者提供插圖依原權利使用，本專案未額外授予素材再散布權利。
+
